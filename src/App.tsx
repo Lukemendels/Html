@@ -34,6 +34,15 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4 text-xs font-medium text-slate-500">
+            <a
+              href="/privacy-recorder-singlefile.html"
+              download="privacy-recorder-singlefile.html"
+              className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold shadow-sm transition-all text-xs"
+              title="Download fully self-contained single-file HTML applet"
+            >
+              <FileCheck className="w-3.5 h-3.5" />
+              Download Single-File HTML
+            </a>
             <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-semibold">
               <Cpu className="w-3.5 h-3.5" />
               Pure Browser Sandbox
