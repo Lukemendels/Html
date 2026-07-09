@@ -27,12 +27,10 @@ import AudioVisualizer from './AudioVisualizer';
 
 interface AudioRecorderProps {
   onRecordingComplete: () => void;
-  folderHandle: any;
 }
 
 export default function AudioRecorder({
   onRecordingComplete,
-  folderHandle,
 }: AudioRecorderProps) {
   const [sourceMode, setSourceMode] = useState<'mic' | 'system' | 'both'>('mic');
   const [recordingName, setRecordingName] = useState<string>('');
@@ -236,19 +234,6 @@ export default function AudioRecorder({
         try {
           // Save locally to IndexedDB first
           await saveRecordingToDb(recordMetadata);
-
-          // Auto-save to synced Directory if configured and permitted
-          if (folderHandle) {
-            try {
-              const filename = `${finalName}.${extension}`;
-              const fileHandle = await folderHandle.getFileHandle(filename, { create: true });
-              const writable = await fileHandle.createWritable();
-              await writable.write(blob);
-              await writable.close();
-            } catch (folderErr) {
-              console.error('Failed auto-saving directly to folder handle:', folderErr);
-            }
-          }
 
           onRecordingComplete();
         } catch (dbErr) {

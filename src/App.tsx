@@ -4,14 +4,13 @@
  */
 
 import { useState } from 'react';
-import { ShieldCheck, HardDrive, Cpu, HelpCircle, FileCheck } from 'lucide-react';
+import { ShieldCheck, HardDrive, Cpu, HelpCircle } from 'lucide-react';
 import AudioRecorder from './components/AudioRecorder';
 import PastRecordings from './components/PastRecordings';
 import PromptDownloader from './components/PromptDownloader';
 
 export default function App() {
   const [refreshTrigger, setRefreshTrigger] = useState<number>(0);
-  const [folderHandle, setFolderHandle] = useState<any>(null);
 
   const handleRecordingComplete = () => {
     // Increment trigger to notify PastRecordings to load new records from IndexedDB
@@ -34,15 +33,6 @@ export default function App() {
           </div>
 
           <div className="flex items-center gap-4 text-xs font-medium text-slate-500">
-            <a
-              href="/privacy-recorder-singlefile.html"
-              download="privacy-recorder-singlefile.html"
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold shadow-sm transition-all text-xs"
-              title="Download fully self-contained single-file HTML applet"
-            >
-              <FileCheck className="w-3.5 h-3.5" />
-              Download Single-File HTML
-            </a>
             <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 bg-emerald-50 text-emerald-700 border border-emerald-100 rounded-full font-semibold">
               <Cpu className="w-3.5 h-3.5" />
               Pure Browser Sandbox
@@ -60,7 +50,6 @@ export default function App() {
           <div className="lg:col-span-7 flex flex-col gap-6">
             <AudioRecorder 
               onRecordingComplete={handleRecordingComplete} 
-              folderHandle={folderHandle}
             />
             
             {/* Embedded Info Panel for security and workflow transparency */}
@@ -70,12 +59,12 @@ export default function App() {
                 Zero-Cloud Privacy Guarantee
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                This recording application is built entirely inside your browser's execution context. All audio mixing, level meter analysis, compression encoding (WebM with Opus), and local folder writing happen **strictly on your CPU**.
+                This recording application is built entirely inside your browser's execution context. All audio mixing, level meter analysis, compression encoding (WebM with Opus), and client-side WAV formatting happen **strictly on your CPU**.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
                 <div className="bg-white p-3 rounded-xl border border-slate-200/40 text-[11px] text-slate-600">
-                  <strong className="text-slate-800 block mb-0.5">📁 Local File Access</strong>
-                  Requires folder permission to write completed WebM/WAV files directly to your local file tree.
+                  <strong className="text-slate-800 block mb-0.5">📥 Safe Local Export</strong>
+                  No external accounts, cloud servers, or trackers. Export recordings directly to your Downloads folder at any time.
                 </div>
                 <div className="bg-white p-3 rounded-xl border border-slate-200/40 text-[11px] text-slate-600">
                   <strong className="text-slate-800 block mb-0.5">💾 Browser Sandbox</strong>
@@ -89,8 +78,6 @@ export default function App() {
           <div className="lg:col-span-5 flex flex-col gap-6">
             <PastRecordings 
               refreshTrigger={refreshTrigger}
-              folderHandle={folderHandle}
-              onSetFolderHandle={setFolderHandle}
             />
           </div>
         </div>

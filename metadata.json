@@ -1,6 +1,6 @@
 {
-  "name": "Privacy Audio Recorder",
-  "description": "A secure, fully local browser audio recorder for system and mic audio, supporting File System Access syncing, compact Opus encoding, WAV export, and an LLM transcription system instruction kit.",
+  "name": "AudioRecorder",
+  "description": "A secure, fully local browser audio recorder for system and mic audio, supporting compact WebM/Opus encoding, high-fidelity WAV export, and an LLM transcription prompt kit.",
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
